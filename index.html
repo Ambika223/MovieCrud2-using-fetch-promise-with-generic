@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row pt-5">
+            <div class="col-6">
+                <a href="index.html" class="logo">
+                    <img src="https://logodownload.org/wp-content/uploads/2014/10/netflix-logo-5.png" alt="logo"
+                        title="Logo"></a>
+            </div>
+            <div class="col-6 text-right">
+                <button class="btn btn-sm net-pri-btn" id="showMovieBtn">Add Movie</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row mt-5" id="movieContainer">
+            <!-- <div class='col-md-4 mt-5'>
+                <div class="card h-100 movieCard">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-10">
+                                <h3 class="headTitle">3Idiots</h3>
+                                <div><small class="createAt">Created At:6-10-2025</small></div>
+                                <div><small class="updatedAt d-none">Updated At:6-10-2026</small></div>
+                            </div>
+                            <div class="col-2">
+                                <h4 class="m-0"><span>6</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body py-0">
+                        <figure>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDUXXV6NuK38vhN7j-t-243omLwGoA3NmiTgrkKSopP-MJisI-xnREYIYKuVm6_BtQ5olOGuBeBocdfY1kzU0D3cbXQTJU4tNuf7zd7w&s=10" alt="3 Idiots">
+                            <figcaption>
+                                <h4>3Idoits</h4>
+                                <p>asdsggtrfds</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="button"  class="btn btn-sm net-sec-btn">Edit</button>
+                        <button type="button"  class="btn btn-sm net-pri-btn">Remove</button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    </div>
+    </div>
+
+    <div class="backdrop closeForm" id="backdrop"></div>
+    <div class="movieModal" id="movieModal">
+
+        <form action="" id="movieForm">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h4 id="movietitle">Add Movie</h4>
+                    <i role="button" id="closeFormBtn" class="fa-solid fa-xmark fa-2x closeForm"></i>
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="movieName">Enter Movie Name</label>
+                        <input type="text" id="movieName" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="movieImg">Enter Image URL</label>
+                        <input type="url" id="movieImg" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="movieDescription">Enter Movie Description</label>
+                        <textarea type="text" id="movieDescription" rows="4" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="movieRating">Give Rating</label>
+                        <select name="" id="movieRating" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="datetime-local" id="year" class="form-control">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <select name="" id="genre" class="form-control">
+                            <option value="">Select Genre</option>
+                            <option value="action">Action</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="horror">Horror</option>
+                            <option value="romance">Romance</option>
+                            <option value="thriller">Thriller</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="submit" id="submitmoviebtn" class="btn btn-sm net-sec-btn">Add Movie</button>
+                    <button type="button" id="updateMoviebtn" class="btn btn-sm net-sec-btn d-none">Update
+                        Movie</button>
+                    <button type="button" class="btn btn-sm net-pri-btn closeForm" id="cancel">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="spinner d-none" id="spinner">
+        <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>
