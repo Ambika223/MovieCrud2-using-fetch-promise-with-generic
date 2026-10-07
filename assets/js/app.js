@@ -67,13 +67,13 @@ function objToArr(obj) {
 
 function setRating(rating) {
     if (rating >= 7) {
-        return " badge-success"
+        return "badge-success"
     }
     else if (rating >= 4) {
-        return " badge-warning"
+        return "badge-warning"
     }
     else {
-        return " badge-danger"
+        return "badge-danger"
     }
 }
 
@@ -130,7 +130,7 @@ function renderingMovie(arr) {
                                 <div><small class="updatedAt">Updated At:${movie.updatedAt}</small></div>
                             </div>
                             <div class="col-2">
-                                <h4 class="m-0"><span class="badge${setRating(movie.movieRating)}">${movie.movieRating}</span></h4>
+                                <h4 class="m-0"><span class="badge ${setRating(movie.movieRating)}">${movie.movieRating}</span></h4>
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@ function onMovieAdd(eve) {
                                 <div><small class="updatedAt d-none">Updated At:${movie_obj.updatedAt}</small></div>
                             </div>
                             <div class="col-2">
-                                <h4 class="m-0"><span class="badge${setRating(movie_obj.movieRating)}">${movie_obj.movieRating}</span></h4>
+                                <h4 class="m-0"><span class="badge ${setRating(movie_obj.movieRating)}">${movie_obj.movieRating}</span></h4>
                             </div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@ function updateMovie() {
                                 <div><small class="updatedAt">Updated At:${UPDATED_OBJ.updatedAt}</small></div>
                             </div>
                             <div class="col-2">
-                                <h4 class="m-0"><span class="badge${setRating(UPDATED_OBJ.movieRating)}">${UPDATED_OBJ.movieRating}</span></h4>
+                                <h4 class="m-0"><span class="badge ${setRating(UPDATED_OBJ.movieRating)}">${UPDATED_OBJ.movieRating}</span></h4>
                             </div>
                         </div>
                     </div>
