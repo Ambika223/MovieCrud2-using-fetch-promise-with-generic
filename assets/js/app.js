@@ -11,7 +11,6 @@ const movieName = document.getElementById('movieName');
 const movieImg = document.getElementById('movieImg');
 const movieDescription = document.getElementById('movieDescription');
 const movieRating = document.getElementById('movieRating');
-const year = document.getElementById('year');
 const createdAt = document.getElementById('createdAt');
 const genre = document.getElementById('genre');
 
@@ -51,19 +50,18 @@ function onModalToggle() {
     }
 }
 
-
 const state = {
     movieArr: [],
     editId: null
 }
 
 function objToArr(obj) {
+    state.movieArr = [];
     for (const key in obj) {
         obj[key].id = key;
         state.movieArr.unshift(obj[key])
     }
 }
-
 
 function setRating(rating) {
     if (rating >= 7) {
@@ -95,7 +93,6 @@ function makeAPIcall(url, methodname, body = null) {
 
 }
 
-
 function fetchMovie() {
     handleSpinner(true);
     makeAPIcall(movie_url, "GET")
@@ -107,7 +104,7 @@ function fetchMovie() {
 
         })
         .catch(err => {
-            snackBar(err, 'error');
+            snackBar(err.message, 'error');
         })
         .finally(() => {
             handleSpinner();
@@ -127,7 +124,7 @@ function renderingMovie(arr) {
                             <div class="col-10">
                                 <h3 class="headTitle">${movie.movieName}</h3>
                                 <div><small class="createAt">Created At:${movie.createdAt}</small></div>
-                                <div><small class="updatedAt">Updated At:${movie.updatedAt}</small></div>
+                                ${movie.updatedAt ? `<div><small class="updatedAt">Updated At:${movie.updatedAt}</small></div>` : ""}
                             </div>
                             <div class="col-2">
                                 <h4 class="m-0"><span class="badge ${setRating(movie.movieRating)}">${movie.movieRating}</span></h4>
@@ -161,15 +158,17 @@ function onMovieAdd(eve) {
         movieName: movieName.value,
         movieImg: movieImg.value,
         movieDescription: movieDescription.value,
-        year: new Date(year.value).getFullYear(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        // createdAt: new Date(),
+        createdAt: createdAt.value,
+
+        updatedAt: null,
         movieRating: movieRating.value,
         genre: genre.value
     }
     // cl(movie_obj);
 
-    onModalToggle()
+    onModalToggle();
+    handleSpinner(true);
     makeAPIcall(movie_url, "POST", movie_obj)
         .then(data => {
             // cl(res)
@@ -185,7 +184,7 @@ function onMovieAdd(eve) {
                             <div class="col-10">
                                 <h3 class="headTitle">${movie_obj.movieName}</h3>
                                 <div><small class="createAt">Created At:${movie_obj.createdAt}</small></div>
-                                <div><small class="updatedAt d-none">Updated At:${movie_obj.updatedAt}</small></div>
+                                     ${movie_obj.updatedAt ? `<div><small class="updatedAt">Updated At:${movie_obj.updatedAt}</small></div>` : ""}
                             </div>
                             <div class="col-2">
                                 <h4 class="m-0"><span class="badge ${setRating(movie_obj.movieRating)}">${movie_obj.movieRating}</span></h4>
@@ -213,7 +212,7 @@ function onMovieAdd(eve) {
             snackBar(`The new movie ${movie_obj.movieName} is added successfully`, 'success')
         })
         .catch(err => {
-            snackBar(err, 'error')
+            snackBar(err.message, "error");
         })
         .finally(() => {
             handleSpinner();
@@ -226,12 +225,14 @@ function editMovie(ele) {
     state.editId = EDIT_ID;
     onModalToggle();
     let EDIT_OBJ = state.movieArr.find(m => m.id === EDIT_ID);
+
     movieName.value = EDIT_OBJ.movieName;
     movieImg.value = EDIT_OBJ.movieImg;
     movieDescription.value = EDIT_OBJ.movieDescription;
     movieRating.value = EDIT_OBJ.movieRating;
-    year.value = EDIT_OBJ.year;
     genre.value = EDIT_OBJ.genre;
+    createdAt.value = EDIT_OBJ.createdAt
+
     submitmoviebtn.classList.add('d-none');
     updateMoviebtn.classList.remove('d-none');
 }
@@ -247,10 +248,10 @@ function updateMovie() {
         movieImg: movieImg.value,
         movieDescription: movieDescription.value,
         movieRating: movieRating.value,
-        year: new Date(year.value).getFullYear(),
         genre: genre.value,
-        createdAt: oldMovie.createdAt,
-        updatedAt: new Date(),
+        createdAt: createdAt.value,
+        // createdAt: new Date().toLocaleString(),
+        updatedAt: new Date().toLocaleDateString(),
         id: UPDATE_ID
     }
     handleSpinner(true);
@@ -267,7 +268,7 @@ function updateMovie() {
                             <div class="col-10">
                                 <h3 class="headTitle">${UPDATED_OBJ.movieName}</h3>
                                 <div><small class="createAt">Created At:${UPDATED_OBJ.createdAt}</small></div>
-                                <div><small class="updatedAt">Updated At:${UPDATED_OBJ.updatedAt}</small></div>
+                                ${UPDATED_OBJ.updatedAt ? `<div><small class="updatedAt">Updated At:${UPDATED_OBJ.updatedAt}</small></div>` : ""}
                             </div>
                             <div class="col-2">
                                 <h4 class="m-0"><span class="badge ${setRating(UPDATED_OBJ.movieRating)}">${UPDATED_OBJ.movieRating}</span></h4>
